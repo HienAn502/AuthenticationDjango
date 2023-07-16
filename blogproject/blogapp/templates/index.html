@@ -4,32 +4,41 @@
 {% block subheading %}A blog theme by Start Bootstrap{% endblock %}
 
 {% block content %}
-        <style>
-            header.masthead {
-                background-image: url("{% static 'assets/img/home-bg.jpg' %}");
-            }
-        </style>
-        
-        <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                {% for post in posts %}
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="/post/{{ post.id }}">
-                            <h2 class="post-title">{{post.title}}</h2>
-                            <h3 class="post-subtitle">{{post.shortDesc}}</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on {{post.createdAt}}
-                        </p>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview
+<style>
+    header.masthead {
+        background-image: url("{% static 'assets/img/home-bg.jpg' %}");
+    }
+</style>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">
+            <strong>{{ message }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        {% for post in posts %}
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            <div class="post-preview">
+                <a href="/post/{{ post.id }}">
+                    <h2 class="post-title">{{post.title}}</h2>
+                    <h3 class="post-subtitle">{{post.shortDesc}}</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">Start Bootstrap</a>
+                    on {{post.createdAt}}
+                </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+            <!-- Post preview
                     <div class="post-preview">
                         <a href="post.html"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
                         <p class="post-meta">
@@ -68,11 +77,11 @@
                     </div>
                     <-- Divider->
                     <hr class="my-4" /> -->
-                    <!-- Pager-->
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
-                </div>
-                {% endfor %}
-            </div>
+            <!-- Pager-->
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts
+                    →</a></div>
         </div>
-        {% endblock %}
-        
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

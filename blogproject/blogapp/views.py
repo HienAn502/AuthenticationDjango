@@ -31,11 +31,11 @@ def getPost(request, postId):
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-
+from .forms import UserRegisterForm
 
 def register(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get("username")
@@ -44,7 +44,7 @@ def register(request):
             )
             return redirect("blogapp:index")
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm()
         messages.error(
             request,
             "Sorry, there're something wrong with the system.\nPlease try again in a few seconds.",
