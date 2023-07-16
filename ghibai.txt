@@ -1,1 +1,79 @@
+------------------------------------------------------------------------------------
+BUOI 1
+------------------------------------------------------------------------------------
 Repository được hiểu là một kho lưu trữ nơi chứa các files của dự án.
+# khi cập nhật repository
+git remote add origin [đường link] # chay 1 lan
+git add .
+git commit -m "message"
+git push origin master
+
+# lấy code về
+git clone [đường link]
+
+# chưa có pipenv
+pip install pipenv
+pipenv install django
+
+# Buoc 1: tạo project django
+pipenv shell: khởi chạy môi trường ảo
+django-admin startproject [tên project]
+
+# Buoc 2: tạo app cho project
+django-admin startapp [tên app]
+
+# Buoc 3: thêm app vào phần INSTALLED APPS của settings.py
+
+# Buoc 4: 2 folder cần thiết (tạo trong app)
+# templates: chứa file html
+# static: chứa file tĩnh (css, ảnh, ...)
+
+# Buoc 5: tạo file urls.py trong app
+------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------
+BUOI 2
+------------------------------------------------------------------------------------
+
+Bước 6: Tạo templates
+=> Tạo file base.html 
+	- Tổng hợp những phần chung của trang web: thanh menu, tiêu đề, header/footer
+	- Tạo {% block content %} {% endblock %}
+=> Tạo file index.html
+	- {% extends 'base.html' %}
+	- {% load static %}
+	- Viết các thông tin xuất hiện trong trang index vào phần content như sau:
+	- {% block content %} *[nội dung]* {% endblock %}
+Bước 7: Tạo hàm index(request)
+	- Vào phần views
+	- hàm nhận vào request
+	- Trả về render(request, 'index.html')
+Bước 8: Tạo urlpatterns trong app/urls.py
+	- from django.urls import path
+	- from . import views
+	- urlpatterns = [
+		path("", views.index, name="index"),
+	]
+Bước 9: Tạo tên app trong app/urls.py
+	- app_name = "ten_app"
+Bước 10: Đăng ký app/urls.py trong project/urls.py
+	- from django.urls import include
+	- Thêm vào urlpatterns:
+		path("", include("app.urls", namespace="ten_app")),
+
+------------------------------------------------------------------------------------
+BUỔI 3 - Tạo trang đăng ký
+------------------------------------------------------------------------------------
+Bước 1: Tạo register.html/signup.html
+	- Sử dụng {% crsf_token %}
+	- Sử dụng {% form|crispy %}
+Bước 2: Tạo hàm register trong views.py
+	- Trả về render(request, 'register.html', {'form':form}
+Bước 3: Thêm url đến register trong app/urls.py
+	- path('register/', views.register, name="register")
+Bước 4: Views.py - tạo form dùng UserCreationForm
+	- Review code đã làm
+Bước 5: 
+
+
